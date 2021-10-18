@@ -517,7 +517,7 @@ module.exports = app => {
         }
         parse_mmsi = numSoma
 
-        if (parse_type === 999999999) {
+        if (parse_mmsi === 999999999) {
             return res.status(400).json({
                 success: false,
                 msg: "Message NOT Decoded!",
@@ -525,6 +525,7 @@ module.exports = app => {
             })
         }
 
+        console.log(parse_mmsi)
 
 
         /* ********************************************************************************************* */
