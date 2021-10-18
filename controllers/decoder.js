@@ -310,19 +310,19 @@ module.exports = app => {
     })
 
     //? API GET - TRAZ TODOS OS MMSIs QUE FORAM DECODIFICADOS EM UM RANGE DE LAT E LON
-    app.route('/api/decoder/mmsi/latlong').get(async (req, res) => {
-
-        console.log(req.body.long_min)
-
+    app.route('/api/decoder/latlong').get(async (req, res) => {
 
         try {
-            const gets = await decoder.find(
-                {
-                    $and: [
-                        { $and: [{ long_min: { $lte: req.body.long_min } }, { long_max: { $gte: req.body.long_max } }] },
-                        { $and: [{ lat_min: { $lte: req.body.lat_min } }, { lat_max: { $gte: req.body.lat_max } }] }
-                    ]
-                }, {})
+            const gets = await decoder.find({ longitude: { $lte: req.body.long_min, $gte: req.body.long_max }, latitude: { $lte: req.body.lat_min, $gte: req.body.lat_max } })
+
+
+            /*             const gets = await decoder.find(
+                            {
+                                $and: [
+                                    { $and: [{ long_min: { $lte: req.body.long_min } }, { long_max: { $gte: req.body.long_max } }] },
+                                    { $and: [{ lat_min: { $lte: req.body.lat_min } }, { lat_max: { $gte: req.body.lat_max } }] }
+                                ]
+                            }, {}) */
             return res.status(200).json({
                 success: true,
                 count: gets.length,
