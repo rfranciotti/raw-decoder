@@ -516,6 +516,17 @@ module.exports = app => {
             numSoma = numSoma + parse_mmsi
         }
         parse_mmsi = numSoma
+
+        if (parse_type === 999999999) {
+            return res.status(400).json({
+                success: false,
+                msg: "Message NOT Decoded!",
+                content: "MMSI Invalid = 999999999"
+            })
+        }
+
+
+
         /* ********************************************************************************************* */
         var parse_status = 0
         numMax = payload_Status.length - 1
