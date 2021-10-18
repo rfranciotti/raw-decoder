@@ -319,8 +319,8 @@ module.exports = app => {
             const gets = await decoder.find(
                 {
                     $and: [
-                        { $and: [{ longitude: { $lte: req.body.long_min } }, { longitude: { $gte: req.body.long_max } }] },
-                        { $and: [{ latitude: { $lte: req.body.lat_min } }, { latitude: { $gte: req.body.lat_max } }] }
+                        { $and: [{ long_min: { $lte: req.body.long_min } }, { long_max: { $gte: req.body.long_max } }] },
+                        { $and: [{ lat_min: { $lte: req.body.lat_min } }, { lat_max: { $gte: req.body.lat_max } }] }
                     ]
                 }, {})
             return res.status(200).json({
